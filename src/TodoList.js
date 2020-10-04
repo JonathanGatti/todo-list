@@ -6,10 +6,11 @@ import Todo from './Todo';
 
 function TodoList(props) {
   const { todos, removeTodo, toggleTodo, updateTodo } = props
+  if(todos.length)
   return(
     <Paper>
       <List>
-        {todos.map(todo => (
+        {todos.map((todo,i) => (
           <>
             <Todo 
               key={todo.id}
@@ -20,12 +21,13 @@ function TodoList(props) {
               toggleTodo={toggleTodo}
               updateTodo={updateTodo}
             />
-            <Divider />
+            {i < todos.length -1 && <Divider />}
           </>
         ))}
       </List>
     </Paper>
   )
+  return null
 }
 
 export default TodoList
