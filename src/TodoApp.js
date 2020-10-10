@@ -6,12 +6,9 @@ import TodoForm from './TodoForm';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import todoState from './hooks/todoState';
+import {TodosProvider} from './contexts/TodosContext';
 
 function TodoApp() {
-  const initialTodos = [{id: 1, task: 'feed dog', completed: false}]
-  const [todos, addTodo, removeTodo, toggleTodo, updateTodo] = todoState(initialTodos);
-  
   return (
     <Paper
       style={{
@@ -31,15 +28,10 @@ function TodoApp() {
       </AppBar>
       <Grid container justify='center' style={{marginTop:'1rem'}}>
         <Grid item xs={11} md={8} lg={4}>
-          <TodoForm 
-            addTodo={addTodo}
-            />
-          <TodoList 
-            todos={todos} 
-            removeTodo={removeTodo}
-            toggleTodo={toggleTodo}
-            updateTodo={updateTodo}
-            />
+          <TodosProvider>
+            <TodoForm />
+            <TodoList />
+          </TodosProvider>
         </Grid>
       </Grid>
     </Paper>
